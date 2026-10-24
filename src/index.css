@@ -1,0 +1,122 @@
+/* ============================================================
+   Optimeal · Estilos globales
+   Tailwind CSS v4: los colores, fuentes y sombras del proyecto
+   se definen aquí en @theme y quedan disponibles como clases,
+   por ejemplo: bg-marfil-100, text-verde-600, shadow-suave.
+   ============================================================ */
+
+@import "tailwindcss";
+
+@theme {
+  /* Tipografías (vienen instaladas con npm, funcionan sin internet) */
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-display--font-variation-settings: "SOFT" 100; /* letras más redondeadas */
+
+  /* Marfil: fondos y superficies */
+  --color-marfil-50: #fffdf8;
+  --color-marfil-100: #fbf8f1;
+  --color-marfil-200: #f4efe3;
+  --color-marfil-300: #e9e2d2;
+  --color-marfil-400: #d8cfbb;
+
+  /* Verde: color principal de la marca */
+  --color-verde-50: #eff6f1;
+  --color-verde-100: #dcebe1;
+  --color-verde-200: #bad7c4;
+  --color-verde-300: #8dbb9d;
+  --color-verde-400: #5e9c74;
+  --color-verde-500: #3f7f57;
+  --color-verde-600: #2f6b4f;
+  --color-verde-700: #255640;
+  --color-verde-800: #1d4332;
+  --color-verde-900: #163326;
+
+  /* Miel: acentos cálidos (plazos, avisos) */
+  --color-miel-50: #fdf6e7;
+  --color-miel-100: #f8e7c2;
+  --color-miel-400: #d99a2b;
+  --color-miel-600: #9a6211;
+  --color-miel-800: #6b440c;
+
+  /* Arcilla: errores y acciones destructivas */
+  --color-arcilla-50: #fbefec;
+  --color-arcilla-100: #f3d4cd;
+  --color-arcilla-500: #b4443a;
+  --color-arcilla-700: #8e3128;
+
+  /* Laguna: acento del área administrativa */
+  --color-laguna-50: #ebf4f4;
+  --color-laguna-100: #d2e7e8;
+  --color-laguna-600: #2e6e73;
+  --color-laguna-800: #1f4c50;
+
+  /* Texto */
+  --color-tinta: #1e2a23;
+  --color-tinta-suave: #55615a;
+
+  /* Sombras "Soft UI" */
+  --shadow-suave: 0 1px 2px rgb(30 42 35 / 0.04), 0 6px 20px -8px rgb(30 42 35 / 0.1);
+  --shadow-flotante: 0 2px 6px rgb(30 42 35 / 0.05), 0 24px 48px -20px rgb(47 107 79 / 0.35);
+  --shadow-boton: 0 1px 0 rgb(255 255 255 / 0.25) inset, 0 6px 14px -6px rgb(47 107 79 / 0.55);
+
+  /* Animaciones */
+  --animate-aparecer: aparecer 0.45s ease-out both;
+  --animate-flotar: flotar 6s ease-in-out infinite;
+
+  @keyframes aparecer {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes flotar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-marfil-100 font-sans text-tinta;
+  }
+  /* Foco visible y consistente para navegar con teclado (accesibilidad) */
+  :focus-visible {
+    outline: 3px solid var(--color-verde-400);
+    outline-offset: 2px;
+    border-radius: 0.6rem;
+  }
+  ::selection {
+    background: var(--color-verde-200);
+  }
+}
+
+/* 🖨️ Impresión (ej: "Imprimir lista" del casino) */
+@media print {
+  @page {
+    margin: 14mm;
+  }
+  body {
+    background: #fff;
+  }
+  /* Todo lo marcado con data-no-imprimir desaparece en papel */
+  [data-no-imprimir] {
+    display: none !important;
+  }
+  [data-area-impresion] {
+    padding: 0 !important;
+    max-width: none !important;
+  }
+}
+
+/* Respeta a quienes prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
